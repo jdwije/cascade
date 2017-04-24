@@ -1,14 +1,11 @@
-type CascadeApi = {
-    chain: (state: any, recover?: (error: any, state: any, fn: any) => any) => any,
-    read: () => any,
-};
+import { Cascade } from './types.d';
 
 /**
  * A tiny cascading state machine.
  */
-const cascade = (s: any): CascadeApi => {
+const cascade = (s: any): Cascade => {
     let state = s;
-    const api: CascadeApi = {
+    const api: Cascade = {
         // Mutate state with function.
         chain: (fn, recover) => {
             try {

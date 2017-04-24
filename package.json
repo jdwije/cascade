@@ -1,12 +1,12 @@
 {
   "name": "@jdw/cascade",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A tiny cascading state machine",
   "main": "dist/index.js",
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "npm run clean && jest --verbose --config .jestrc",
-    "build": "npm run clean && tsc --outDir dist",
+    "build": "npm run clean && tsc --outDir dist && cp src/types.d.ts dist",
     "clean": "rm -rf dist",
     "lint": "tslint src"
   },
