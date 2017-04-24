@@ -21,17 +21,26 @@ cascade(100)
     .chain(square)
     .chain(increment)
     .read(); // 10001
-    
-const mal = () => throw new Error('foo');
-
-cascade(null)
-    .chain(mal, (err, state, fn) => {
-        // Optional second callback in case of an error...
-        // err.message is eq 'foo'
-        // state is eq null
-        // fn is eq mal
-        
-        return true;
-    })
-    .read(); // true
 ```
+
+## API
+
+#### cascade(initialState: any): Cascade
+
+This method takes an initial state and returns a `Cascade` type object.
+
+#### Cascade.chain(fn: (state: any) => any) => Cascade
+
+This method takes a function, invoking it with the current state as its first
+argument and then changing (mutating) the state of machine to the resulting output.
+
+#### Cascade.chain(fn: (state: any) => any, recover: (err: Error, state: any, fn: any) => any) => Cascade
+
+As above however with an optional recovery method supplied. The recovery method
+is invoked in case of an error with the error, current state, and the function
+invoked.
+
+### Cascade.read() => any
+
+Returns the current state of the machine.
+
