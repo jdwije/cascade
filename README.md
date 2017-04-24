@@ -40,7 +40,7 @@ As above however with an optional recovery method supplied. The recovery method
 is invoked in case of an error with the error, current state, and the function
 invoked.
 
-### Cascade.read() => any
+#### Cascade.read() => any
 
 Returns the current state of the machine.
 
