@@ -1,0 +1,15 @@
+# Build artifacts
+node_modules
+jspm_packages
+npm-debug.log
+dist
+
+# IDE
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*

@@ -1,0 +1,31 @@
+{
+  "name": "@jdw/cascade",
+  "version": "0.0.1",
+  "description": "A tiny cascading state machine",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "npm run test:unit",
+    "test:unit": "npm run clean && jest --verbose --config .jestrc",
+    "build": "npm run clean && tsc --outDir dist",
+    "clean": "rm -rf dist",
+    "lint": "tslint src"
+
+  },
+  "keywords": [
+    "state-machine",
+    "utility"
+  ],
+  "author": "Jason Wijegooneratne",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^3.5.1",
+    "@types/jest": "^19.2.2",
+    "@types/node": "^7.0.13",
+    "chai": "^3.5.0",
+    "jest": "^19.0.2",
+    "ts-jest": "^19.0.10",
+    "tslint": "^5.1.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "typescript": "^2.2.2"
+  }
+}

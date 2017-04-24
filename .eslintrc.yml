@@ -1,0 +1,16 @@
+extends: airbnb-base
+parser: babel-eslint
+root: true
+
+env:
+  node: true
+  jest: true
+  jasmine: true
+
+rules:
+  import/no-dynamic-require: 0
+  global-require: 0
+  dot-notation: 0
+  max-len: 0
+  no-console: 0
+  no-multiple-empty-lines: 0
