@@ -41,6 +41,14 @@ object.
 This method takes function `fn` invoking it with the machines state as an
 argument and then mutating state to the result.
 
+_example:_
+```javascript
+return cascade(1)
+    .chain(x => x + 1) // internal state set to: 2
+    .chain(x => x * x) // internal state set to: 4
+    .read()            // return internal state: 4
+```
+
 #### chain(fn, cb) => Cascade
 
 As above however with the optional recovery method `cb` supplied. `cb` is invoked
