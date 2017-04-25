@@ -72,20 +72,23 @@ const process = (request) => {
     // do stuff
     return request;
 };
-
-const handler = (request, cb) => {
-    const recover = (err, state, fn) => {
+const recover = (cb) => {
+    return (err, state, fn) => {
         cb({
             statusCode: 500,
             description: err.message,
             errors: err.stack,
         });
     };
+}
+
+const handler = (request, cb) => {
+    const failure = recover(cb);
     
     return cascade(request)
-        .chain(validateWith(validator, 'http://json-schema.example.com/request#'), recover)
-        .chain(process, recover)
-        .chain(validateWith(validator, 'http://json-schema.example.com/response#'), recover)
+        .chain(validateWith(validator, 'http://json-schema.example.com/request#'), failure)
+        .chain(process, failure)
+        .chain(validateWith(validator, 'http://json-schema.example.com/response#'), failure)
         .chain(cb);
 };
 ```
