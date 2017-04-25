@@ -8,12 +8,12 @@ Cascade
 ## quick-start
 
 install:
-```
+```bash
 npm i --save @jdw/cascade
 ```
 
 usage:
-```
+```javascript
 import cascade from '@jdw/cascade';
 
 const increment = x => x++;
