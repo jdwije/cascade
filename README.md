@@ -3,6 +3,8 @@ Cascade
 
 > A tiny cascading state machine.
 
+[![Build Status](https://travis-ci.org/jdwije/cascade.svg?branch=master)](https://travis-ci.org/jdwije/cascade)
+
 ## quick-start
 
 install:
