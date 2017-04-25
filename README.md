@@ -62,7 +62,7 @@ const process = state => throw new Error();
 const recover = (err, state, fn) => state + 10;
 
 return cascade(90)
-    .chain(process, recover) // errors on process(), invoke recover().
+    .chain(process, recover) // errors on process() invoking recover().
     .read();                 // outputs: 100
 ```
 
