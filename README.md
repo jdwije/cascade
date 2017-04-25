@@ -7,12 +7,12 @@ Cascade
 
 ## quick-start
 
-install:
+_installation:_
 ```bash
 npm i --save @jdw/cascade
 ```
 
-usage:
+_usage:_
 ```javascript
 import cascade from '@jdw/cascade';
 
