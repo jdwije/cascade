@@ -47,7 +47,49 @@ As above however with the optional recovery method `cb` supplied. `cb` is invoke
 in case something went wrong with the error, state, and `fn` supplied as its
 arguments.
 
+_example:_
+```javascript
+// How one might handle async HTTP request processing in pseudo-code.
+
+
+const ajv = new Ajv();
+const validateWith = (validator, schemaId) => {
+    return (document) => {
+        if (!validator.validate(schemaId, document))
+            throw new Error(validator.errors);
+        return document;
+    };
+};
+const process = (request) => {
+    // do stuff
+    return request;
+};
+
+const handler = (request, cb) => {
+    const recover = (err, state, fn) => {
+        cb({
+            statusCode: 500,
+            description: err.message,
+            errors: err.stack,
+        });
+    };
+    
+    return cascade(request)
+        .chain(validateWith(validator, 'http://json-schema.example.com/request#'),
+            recover)
+        .chain(process, recover)
+        .chain(validateWith(validator, 'http://json-schema.example.com/response#'),
+            recover)
+        .chain(cb);
+};
+```
+
 #### read() => any
 
 Returns the current state of the machine.
 
+_example:_
+```javascript
+return cascade(true)
+    .read(); // true
+```
