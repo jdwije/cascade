@@ -57,40 +57,13 @@ arguments.
 
 _example:_
 ```javascript
-// How one might handle async HTTP request processing in pseudo-code.
 
+const process = state => throw new Error();
+const recover = (err, state, fn) => state + 10;
 
-const ajv = new Ajv();
-const validateWith = (validator, schemaId) => {
-    return (document) => {
-        if (!validator.validate(schemaId, document))
-            throw new Error(validator.errors);
-        return document;
-    };
-};
-const process = (request) => {
-    // do stuff
-    return request;
-};
-const recover = (cb) => {
-    return (err, state, fn) => {
-        cb({
-            statusCode: 500,
-            description: err.message,
-            errors: err.stack,
-        });
-    };
-}
-
-const handler = (request, cb) => {
-    const failure = recover(cb);
-    
-    return cascade(request)
-        .chain(validateWith(validator, 'http://json-schema.example.com/request#'), failure)
-        .chain(process, failure)
-        .chain(validateWith(validator, 'http://json-schema.example.com/response#'), failure)
-        .chain(cb);
-};
+return cascade(90)
+    .chain(process, recover) // errors on process(), invoke recover().
+    .read();                 // outputs: 100
 ```
 
 #### read() => any
