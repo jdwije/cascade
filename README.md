@@ -75,11 +75,9 @@ const handler = (request, cb) => {
     };
     
     return cascade(request)
-        .chain(validateWith(validator, 'http://json-schema.example.com/request#'),
-            recover)
+        .chain(validateWith(validator, 'http://json-schema.example.com/request#'), recover)
         .chain(process, recover)
-        .chain(validateWith(validator, 'http://json-schema.example.com/response#'),
-            recover)
+        .chain(validateWith(validator, 'http://json-schema.example.com/response#'), recover)
         .chain(cb);
 };
 ```
