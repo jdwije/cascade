@@ -17,6 +17,8 @@ import cascade from '@jdw/cascade';
 const increment = x => x++;
 const square = x => Math.pow(x, x);
 
+// apply state to functions and sequentially
+// calculate a result
 cascade(100)
     .chain(square)
     .chain(increment)
