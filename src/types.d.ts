@@ -1,5 +1,5 @@
 export type Cascade = {
-    chain: (state: any, recover?: (error: any, state: any, fn: any) => any) => any,
+    chain: (fn: (state: any, ...args) => any, ...args) => any,
     read: () => any,
 };
 

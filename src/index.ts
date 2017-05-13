@@ -3,19 +3,17 @@ import { Cascade } from './types.d';
 /**
  * A tiny cascading state machine.
  */
-const cascade = (s: any): Cascade => {
-    let state = s;
+const cascade = (x: any): Cascade => {
+    let state = x;
     const api: Cascade = {
-        // Mutate state with function.
-        chain: (fn, recover) => {
-            try {
-                const op = fn(state);
-                state = op;
-            } catch (err) {
-                if (!recover) throw err;
-                state = recover(err, state, fn);
-            }
-
+        /**
+         * This function allows one to pipe the current state through the
+         * supplied function and optionally supply some additional arguments for
+         * it.
+         */
+        chain: (fn: (state: any, ...rest) => any, ...args) => {
+            state = args
+                ? fn.apply(null, [state].concat(args)) : fn(state);
             return api;
         },
 

@@ -26,21 +26,19 @@ describe('@jdw/cascade/index', () => {
         expect(result.foo).to.eq(1200);
     });
 
-    it('can recover from errors whilst chaining', () => {
-        const state = { foo: 300, };
-        const error = new Error('foo');
+    it('can transform state by applying some arguments to a function', () => {
+        const fn = (state, fx) => {
+            state.foo = fx(state.foo, 2);
+            return state;
+        };
         const result = subject
-            .chain(() => {
-                throw error;
-            }, (err, fn) => {
-                expect(err).to.eq(error);
-                return state;
-            })
+            .chain(fn, Math.pow)
             .read();
-        expect(result).to.eq(state);
+
+        expect(result.foo).to.eq(1440000);
     });
 
-    it('still throws errors if no recovery is specified', () => {
+    it('bubbles up errors for the user to handle', () => {
         const test = () => {
             subject
                 .chain((state) => {
